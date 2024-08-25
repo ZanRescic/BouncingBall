@@ -211,7 +211,7 @@ int main(void)
   sprintf((char*)time_str, "Score: %d", counter);
   UTIL_LCD_DisplayStringAt(0, 15, (uint8_t *)time_str, CENTER_MODE);
 
-  sprintf((char *)time_str, "Time: %lu s", (time_elapsed / 1000));
+  sprintf((char *)time_str, "Time: %lu.%lu s", (time_elapsed / 1000), (time_elapsed % 1000)/100);
   UTIL_LCD_DisplayStringAt(0, 45, (uint8_t *)time_str, CENTER_MODE);
 
   UTIL_LCD_DisplayStringAt(0, 75, (uint8_t *)"To play again click on", CENTER_MODE);
@@ -276,7 +276,7 @@ static void Init_LCD_TS(void)
 	TS_Init->Width = x_size;
 	TS_Init->Height = y_size;
 	TS_Init->Orientation = TS_SWAP_XY;
-	TS_Init->Accuracy = 1;
+	TS_Init->Accuracy = 3;
 	BSP_TS_Init(0, TS_Init);
 }
 
@@ -292,7 +292,7 @@ static void Display_InitialContent(void)
 	BSP_LCD_FillRect(0, 0, 0, x_size, y_size, UTIL_LCD_COLOR_LIGHTBLUE);
 
 	/* Set the LCD Text Color */
-	UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_BLACK);
+	UTIL_LCD_SetTextColor(UTIL_LCD_COLOR_WHITE);
 
 	/* Display LCD messages */
 	UTIL_LCD_SetFont(&Font24);
@@ -315,7 +315,7 @@ static void DrawBall(bool b)
 	}
 
 	/*Draw ball*/
-	UTIL_LCD_FillCircle(ball.x, ball.y, ball.radius, UTIL_LCD_COLOR_BLACK);
+	UTIL_LCD_FillCircle(ball.x, ball.y, ball.radius, UTIL_LCD_COLOR_WHITE);
 }
 
 static void PlayGame(void)
